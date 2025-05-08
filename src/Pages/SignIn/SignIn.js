@@ -7,6 +7,7 @@ import './Signin.css'; // Import external styling
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
@@ -15,7 +16,10 @@ export default function SignIn() {
       alert("Login successful");
       navigate('/dashboard');
     } catch (error) {
-      alert("Login failed: " + error.message);
+      // alert("Login failed: " + error.message);
+      setErrorMessage("Login failed: " + error.message); // Set error message
+      setTimeout(() => setErrorMessage(""), 3500);
+
     }
   };
 
@@ -25,7 +29,9 @@ export default function SignIn() {
       await sendPasswordResetEmail(auth, email);
       alert("Reset email sent. Check your inbox.");
     } catch (error) {
-      alert("Error: " + error.message);
+      // alert("Error: " + error.message);
+      setErrorMessage("Error: " + error.message);
+      setTimeout(() => setErrorMessage(""), 3500);
     }
   };
 
@@ -66,6 +72,12 @@ export default function SignIn() {
           <span onClick={() => navigate('/')}>Sign Up</span>
         </p>
       </div>
+      {errorMessage && (
+  <div className="error-message">
+    <p>{errorMessage}</p>
+  </div>
+)}
+
     </div>
   );
 }

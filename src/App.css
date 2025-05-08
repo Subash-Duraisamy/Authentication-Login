@@ -23,6 +23,51 @@ body {
 .logout-btn:hover {
   background-color: black;
 }
+/* Error message popup style */
+
+  
+
+
+/* Error message popup style */
+.error-message {
+  background-color: lightyellow;  /* Red background */
+  color: #721c24;             /* Dark red text */
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid skyblue;  /* Light red border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  
+  /* Animation */
+  animation: slideInRight 0.5s ease-out, slideOutLeft 0.5s ease-out 3s forwards;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%); /* Start from the right */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);    /* End in the normal position */
+    opacity: 1;
+  }
+}
+
+/* Slide out to left */
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);    /* Start from the normal position */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%); /* End to the left */
+    opacity: 0;
+  }
+}
+
 
 .App {
   max-width: 600px;

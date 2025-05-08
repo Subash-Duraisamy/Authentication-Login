@@ -9,6 +9,9 @@ export default function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+   const [errorMessage, setErrorMessage] = useState('');
+   const [successMessage, setSuccessMessage] = useState('');
+
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
@@ -24,15 +27,34 @@ export default function SignUp() {
         lastUpdated: Timestamp.now(),
       });
 
-      alert("Signup successful!");
+      setSuccessMessage("Signup successful!");
+      setTimeout(() => {
+        setSuccessMessage(""); // optional
+        navigate("/signin");
+      }, 3500); // delay must match the animation duration
+      
+
+    
       navigate("/signin");
     } catch (error) {
-      alert(error.message);
+      setErrorMessage("Login failed: " + error.message);
+      setTimeout(() => setErrorMessage(""), 6500);
     }
   };
 
   return (
     <div className="signup-container">
+  {successMessage && (
+  <div className="success-message">
+    <p>{successMessage}</p>
+  </div>
+)}
+     {errorMessage && (
+  <div className="error-message">
+
+    <p>{errorMessage}</p>
+  </div>
+)}
       <h2 className="signup-heading">
 
       {/* <span>T</span> */}

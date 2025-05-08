@@ -118,6 +118,7 @@ const App = () => {
     } catch (e) {
       console.error("Error logging out: ", e);
       setMessage("Error logging out.");
+      
     }
   };
   
