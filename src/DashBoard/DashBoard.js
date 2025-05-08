@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -19,6 +19,29 @@ const App = () => {
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTaskContent, setEditingTaskContent] = useState("");
   const [user, setUser] = useState(null);
+
+  // Fetch tasks (memoized)
+  const fetchTasks = useCallback(async () => {
+    if (!user) {
+      setMessage("Please log in to view tasks.");
+      return;
+    }
+
+    try {
+      const querySnapshot = await getDocs(collection(db, "users", user.uid, "tasks"));
+      const tasksList = [];
+      querySnapshot.forEach((doc) => {
+        tasksList.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      setTasks(tasksList);
+    } catch (e) {
+      console.error("Error fetching tasks: ", e);
+      setMessage("Error fetching tasks.");
+    }
+  }, [user]);
 
   // Add task
   const addTask = async () => {
@@ -51,37 +74,20 @@ const App = () => {
     }
   };
 
+  // Auth state listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
     return () => unsubscribe();
   }, []);
 
-  // Fetch tasks
-  const fetchTasks = async () => {
-    if (!user) {
-      setMessage("Please log in to view tasks.");
-      return;
+  // Load tasks when user is set
+  useEffect(() => {
+    if (user) {
+      fetchTasks();
     }
-
-    try {
-      const querySnapshot = await getDocs(collection(db, "users", user.uid, "tasks"));
-      const tasksList = [];
-      querySnapshot.forEach((doc) => {
-        tasksList.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-
-      setTasks(tasksList);
-    } catch (e) {
-      console.error("Error fetching tasks: ", e);
-      setMessage("Error fetching tasks.");
-    }
-  };
+  }, [user, fetchTasks]);
 
   // Delete task with animation
   const deleteTask = async (taskId) => {
@@ -136,15 +142,10 @@ const App = () => {
     setEditingTaskContent(currentTask);
   };
 
-  useEffect(() => {
-    if (user) {
-      fetchTasks();
-    }
-  }, [user]);
-
   return (
     <div className="App">
-      {user && <div className="user-info"> {user.displayName || user.email}</div>}
+      {user && <div className="user-info">{user.displayName || user.email}</div>}
+
       <div className="heading-container">
         <div className="hanging-nail"></div>
         <h1 className="hanging-heading">
@@ -181,9 +182,7 @@ const App = () => {
                 deletingTaskId === taskItem.id ? "deleting" : ""
               }`}
             >
-              <div
-                className={`task-box ${taskItem.completed ? "completed" : ""}`}
-              >
+              <div className={`task-box ${taskItem.completed ? "completed" : ""}`}>
                 {editingTaskId === taskItem.id ? (
                   <input
                     type="text"
@@ -210,16 +209,12 @@ const App = () => {
                 )}
 
                 <button
-                  onClick={() =>
-                    toggleTaskCompletion(taskItem.id, taskItem.completed)
-                  }
+                  onClick={() => toggleTaskCompletion(taskItem.id, taskItem.completed)}
                   className="icon-btn"
                 >
                   <i
                     className={`fas ${
-                      taskItem.completed
-                        ? "fa-check-circle black-completed"
-                        : "fa-circle blue-pending"
+                      taskItem.completed ? "fa-check-circle black-completed" : "fa-circle blue-pending"
                     }`}
                   ></i>
                 </button>
