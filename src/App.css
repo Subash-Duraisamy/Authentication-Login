@@ -8,6 +8,21 @@ body {
   padding: 0;
   background-color: #f0f2f5;
 }
+.logout-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: skyblue;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: black;
+}
 
 .App {
   max-width: 600px;
@@ -68,17 +83,41 @@ body {
 }
 
 /* Input Section */
+/* .input-wrapper {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 20px;
+}
+
+
+.input-wrapper input {
+  flex: 1;
+  padding: 10px 120px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.input-wrapper button {
+  padding: 10px 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(15, 83, 110);
+  color: white;
+  cursor: pointer;
+} */
+
 .input-wrapper {
   display: flex;
-  gap: 10px;
+  gap: 10px; /* Adjusted gap */
   margin-bottom: 20px;
 }
 
 .input-wrapper input {
-  flex: 1;
+  flex: 1; /* This allows the input box to take up more space */
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .input-wrapper button {
@@ -88,6 +127,34 @@ body {
   background-color: rgb(15, 83, 110);
   color: white;
   cursor: pointer;
+  width: auto; /* Ensure the button takes up only as much space as needed */
+}
+/* Login Button */
+.login-btn {
+  padding: 12px 24px;
+  background-color: black; /* Blue background */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  display: block;
+  width: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-btn:hover {
+  background-color: skyblue; /* Darker blue on hover */
+  transform: translateY(-3px);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
 }
 
 /* Message */
@@ -280,7 +347,7 @@ body {
 }
 
 .icon-btn:hover {
-  color: #007bff;
+  color: skyblue;
 }
 
 .icon-btn .fa-check-circle {

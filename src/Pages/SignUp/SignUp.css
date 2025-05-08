@@ -1,0 +1,80 @@
+/* SignUp.css */
+.signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .signup-heading {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    animation: pendulum 3s infinite ease-in-out;
+    transform-origin: top center;
+    position: relative;
+  }
+  
+  .signup-heading::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 30px;
+    background-color: #555;
+  }
+  
+  .signup-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .signup-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: rgb(15, 83, 110);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .signup-button:hover {
+    background-color: rgb(11, 60, 82);
+  }
+  
+  .signup-redirect {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .signup-redirect span {
+    color: skyblue;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* Pendulum animation */
+  @keyframes pendulum {
+    0% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+  }
+  .blue-letter {
+    color: skyblue;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  

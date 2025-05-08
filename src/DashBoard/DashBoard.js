@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 import {
   collection,
   doc,
@@ -105,7 +108,19 @@ const App = () => {
       }
     }, 500);
   };
-
+  
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      setTasks([]);
+      setMessage("You have been logged out.");
+    } catch (e) {
+      console.error("Error logging out: ", e);
+      setMessage("Error logging out.");
+    }
+  };
+  
   // Toggle task completion
   const toggleTaskCompletion = async (taskId, currentStatus) => {
     try {
@@ -119,7 +134,16 @@ const App = () => {
       console.error("Error completing task: ", e);
     }
   };
-
+  
+  const navigate = useNavigate();
+  
+  const handleLogin = () => {
+    // Redirect to the login page
+    navigate("/signin"); // Assuming the login page is '/login'
+    
+    // Optionally, trigger the login process if using Firebase authentication:
+    // auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  };
   // Edit task
   const saveEditTask = async () => {
     try {
@@ -232,6 +256,18 @@ const App = () => {
           <p>No tasks found.</p>
         )}
       </div>
+      {user && (
+  <button className="logout-btn" onClick={handleLogout}>
+    Logout
+  </button>
+)}
+{!user && (
+  <button className="login-btn" onClick={handleLogin}>
+    Login
+  </button>
+)}
+
+
     </div>
   );
 };

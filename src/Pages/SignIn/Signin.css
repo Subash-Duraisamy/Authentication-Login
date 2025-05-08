@@ -1,0 +1,146 @@
+/* SignIn.css */
+
+/* Container */
+.signin-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Style */
+  .heading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hanging-nail {
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 auto 5px;
+  }
+  
+  .hanging-heading {
+    position: relative;
+    display: inline-block;
+    font-size: 32px;
+    color: #333;
+    animation: pendulum 3s infinite ease-in-out;
+    transform-origin: top center;
+    margin: 20px auto;
+  }
+  
+  .hanging-heading::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 30px;
+    background-color: #555;
+  }
+  
+  @keyframes pendulum {
+    0% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+  }
+
+  .blue-letter {
+    color: skyblue;
+  }
+  /* Add flexbox to center the button container */
+.button-wrapper {
+    display: flex;
+    justify-content: center;  /* Horizontally center the button */
+    align-items: center;      /* Vertically center the button (if the container has height) */
+    margin-top: 20px;         /* Optional: adjust top margin if needed */
+  }
+  
+  /* Style for the login button */
+  .login-btnlogin {
+    padding: 12px 24px;
+    background-color:skyblue;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btnlogin:hover {
+    background-color: black; /* Darker blue on hover */
+  }
+  
+  .login-btnlogin:active {
+    transform: translateY(1px); /* Button pressed effect */
+  }
+  
+  
+  /* Input and Button */
+  .input-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .input-wrapper input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .input-wrapper button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(15, 83, 110);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  /* Forgot password & Sign up text */
+  .signin-links {
+    text-align: center;
+    color: #555;
+  }
+  
+  .signin-links span {
+    color: skyblue;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .forgot-password {
+    color: skyblue;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .hanging-heading {
+      font-size: 24px;
+    }
+  
+    .input-wrapper input,
+    .input-wrapper button {
+      font-size: 14px;
+    }
+  }
+  
